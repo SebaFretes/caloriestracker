@@ -1,6 +1,10 @@
-import { Form } from "./components/Form"
+import { useReducer } from "react";
+import { Form } from "./components/Form";
+import { formReducer, initialState } from "./reducers/form-reducer";
 
 export const App = () => {
+
+  const [state, dispatch] = useReducer(formReducer, initialState);
 
   return (
     <>
@@ -12,7 +16,7 @@ export const App = () => {
 
       <div className="py-20 px-5 bg-blue-200">
         <div className="max-w-4xl mx-auto">
-          <Form />
+          <Form dispatch={dispatch}/>
         </div>
       </div>
 

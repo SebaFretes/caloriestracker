@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { categories } from '../data/categories';
+// import { uuidv4 }  from 'uuid';
 
-export const Form = () => {
+export const Form = ({dispatch}) => {
 
     const [form, setForm] = useState({
         category: '',
         activity: '',
         calories: ''
     });
-
+    
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -21,13 +22,26 @@ export const Form = () => {
         return category.trim() !== '' && activity.trim() !== '' && calories > 0;
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        e.preventDefault();
+        dispatch({
+            type: 'save form',
+            payload: form
+        });
+        setForm({
+            category: '',
+            activity: '',
+            calories: ''
+        });
+    };
 
     return (
-        <form className="space-y-5 bg-white shadow p-10 rounded-lg">
+        <form className="space-y-5 bg-white shadow p-10 rounded-lg" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 gap-3">
                 <label className='font-bold'>Category: </label>
                 <select className="border border-slate-300 rounded-lg w-full bg-white" id='category' value={form.category} onChange={handleChange}>
-                    <option value="" disabled selected>Choose an option</option>
+                    <option value="" >Choose an option</option>
                     {categories.map(cat => (
                         <option key={cat.id} value={cat.id}>
                             {cat.name}
