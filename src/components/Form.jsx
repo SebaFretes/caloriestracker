@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { categories } from '../data/categories';
-// import { uuidv4 }  from 'uuid';
+import { v4 }  from 'uuid';
 
 export const Form = ({dispatch}) => {
 
-    const [form, setForm] = useState({
+    const initialState = {
         category: '',
         activity: '',
         calories: ''
-    });
+    };
+
+    const [form, setForm] = useState(initialState);
     
     const handleChange = (e) => {
         setForm({
@@ -29,11 +31,7 @@ export const Form = ({dispatch}) => {
             type: 'save form',
             payload: form
         });
-        setForm({
-            category: '',
-            activity: '',
-            calories: ''
-        });
+        setForm(initialState);
     };
 
     return (
