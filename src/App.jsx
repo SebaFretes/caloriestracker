@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 import { Form } from "./components/Form";
 import { formReducer, initialState } from "./reducers/form-reducer";
+import { ListActivities } from "./components/ListActivities";
 
 export const App = () => {
 
@@ -18,6 +19,10 @@ export const App = () => {
         <div className="max-w-4xl mx-auto">
           <Form dispatch={dispatch}/>
         </div>
+      </div>
+      
+      <div className="p-10 mx-auto max-w-4xl">
+        <ListActivities state={state} />
       </div>
 
     </>

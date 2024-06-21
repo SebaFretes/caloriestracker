@@ -1,4 +1,4 @@
-export const initialState = []
+export const initialState = [];
 
 export const saveFormActions = (newForm) => ({
     type: 'save form',

@@ -5,6 +5,7 @@ import { v4 }  from 'uuid';
 export const Form = ({dispatch}) => {
 
     const initialState = {
+        id: v4(),
         category: '',
         activity: '',
         calories: ''
