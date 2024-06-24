@@ -21,7 +21,7 @@ export const ListActivities = ({ state, dispatch }) => {
     };
 
     const deleteActivity = (item) => {
-        dispatch(deleteFormActions(item));
+        dispatch(deleteFormActions(item.id));
     };
 
     return (
