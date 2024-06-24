@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { categories } from '../data/categories';
-import { PencilSquareIcon } from '@heroicons/react/24/outline';
+import { PencilSquareIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { Form } from './Form';
+import { deleteFormActions } from '../reducers/form-reducer';
 
 export const ListActivities = ({ state, dispatch }) => {
     const [activityToEdit, setActivityToEdit] = useState(null);
@@ -19,6 +20,10 @@ export const ListActivities = ({ state, dispatch }) => {
         setActivityToEdit(null);
     };
 
+    const deleteActivity = (item) => {
+        dispatch(deleteFormActions(item));
+    };
+
     return (
         <>
             <h2 className="text-center text-4xl font-bold text-slate-600 uppercase">Activities</h2>
@@ -33,6 +38,9 @@ export const ListActivities = ({ state, dispatch }) => {
                     <div className='flex gap-5 items-center'>
                         <button onClick={() => setActivity(item)}>
                             <PencilSquareIcon className='h-8 w-8 text-gray-800' />
+                        </button>
+                        <button onClick={() => deleteActivity(item)}>
+                            <XCircleIcon className='h-8 w-8 text-red-500' />
                         </button>
                     </div>
                 </div>
