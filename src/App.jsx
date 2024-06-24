@@ -22,9 +22,9 @@ export const App = () => {
       </div>
       
       <div className="p-10 mx-auto max-w-4xl">
-        <ListActivities state={state} />
+        <ListActivities state={state} dispatch={dispatch} />
       </div>
 
     </>
   )
-}
+};

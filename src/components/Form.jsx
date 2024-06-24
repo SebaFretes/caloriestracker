@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { categories } from '../data/categories';
-import { v4 }  from 'uuid';
+import { v4 } from 'uuid';
+import { saveFormActions, updateFormActions } from '../reducers/form-reducer';
 
-export const Form = ({dispatch}) => {
-
+export const Form = ({ dispatch, activityToEdit, clearEdit }) => {
     const initialState = {
         id: v4(),
         category: '',
@@ -12,12 +12,20 @@ export const Form = ({dispatch}) => {
     };
 
     const [form, setForm] = useState(initialState);
-    
+
+    useEffect(() => {
+        if (activityToEdit) {
+            setForm(activityToEdit);
+        } else {
+            setForm(initialState);
+        }
+    }, [activityToEdit]);
+
     const handleChange = (e) => {
         setForm({
             ...form,
             [e.target.id]: e.target.value
-        })
+        });
     };
 
     const formValidation = () => {
@@ -27,11 +35,12 @@ export const Form = ({dispatch}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        e.preventDefault();
-        dispatch({
-            type: 'save form',
-            payload: form
-        });
+        if (activityToEdit) {
+            dispatch(updateFormActions(form));
+            clearEdit(); // Clear the form after editing
+        } else {
+            dispatch(saveFormActions(form));
+        }
         setForm(initialState);
     };
 
@@ -40,7 +49,7 @@ export const Form = ({dispatch}) => {
             <div className="grid grid-cols-1 gap-3">
                 <label className='font-bold'>Category: </label>
                 <select className="border border-slate-300 rounded-lg w-full bg-white" id='category' value={form.category} onChange={handleChange}>
-                    <option value="" >Choose an option</option>
+                    <option value="">Choose an option</option>
                     {categories.map(cat => (
                         <option key={cat.id} value={cat.id}>
                             {cat.name}
@@ -74,9 +83,9 @@ export const Form = ({dispatch}) => {
 
             <input type='submit'
                 className='bg-gray-800 hover:bg-gray-900 w-full p-2 font-bold uppercase text-white cursor-pointer disabled:opacity-10'
-                value={form.category === '1' ? 'Save Food' : 'Save Exercise'}
+                value={activityToEdit ? 'Update Activity' : (form.category === '1' ? 'Save Food' : 'Save Exercise')}
                 disabled={!formValidation()}
             />
         </form>
-    )
-}
+    );
+};
