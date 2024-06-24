@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from "react";
 import { Form } from "./components/Form";
-import { formReducer, initialState } from "./reducers/form-reducer";
+import { formReducer, initialState, restartApp } from "./reducers/form-reducer";
 import { ListActivities } from "./components/ListActivities";
 
 export const App = () => {
@@ -11,11 +11,20 @@ export const App = () => {
     localStorage.setItem('activities', JSON.stringify(state))
   }, [state]);
 
+  const handleRestart = () => {
+    dispatch(restartApp());
+  }
+
   return (
     <>
       <div className="py-3 bg-blue-300">
         <div className="max-w-4xl mx-auto flex justify-between">
           <h1 className="text-center text-lg font-bold text-white uppercase">Calories Tracker</h1>
+          {state.length > 0 && (
+            <button onClick={handleRestart} className="bg-gray-800 hover:bg-gray-900 p-2 font-bold uppercase cursor-pointer text-white rounded-lg">
+              Restart App
+            </button>
+          )}
         </div>
       </div>
 

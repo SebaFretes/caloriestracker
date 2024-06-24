@@ -13,6 +13,10 @@ export const deleteFormActions = (deletedForm) => ({
     payload: deletedForm
 });
 
+export const restartApp = () => ({
+    type: 'restart app'
+});
+
 const localStorageActivities = () => {
     const activities = localStorage.getItem('activities');
     return activities ? JSON.parse(activities) : []
@@ -21,15 +25,16 @@ const localStorageActivities = () => {
 export const initialState = localStorageActivities();
 
 export const formReducer = (state = initialState, action = {}) => {
-    if (action.type === 'save form') {
-        return [
-            ...state,
-            action.payload
-        ];
-    } else if (action.type === 'update form') {
-        return state.map(item => item.id === action.payload.id ? action.payload : item);
-    } else if (action.type === 'delete form') {
-        return state.filter(item => item.id !== action.payload.id)
+    switch (action.type) {
+        case 'save form':
+            return [...state, action.payload];
+        case 'update form':
+            return state.map(item => item.id === action.payload.id ? action.payload : item);
+        case 'delete form':
+            return state.filter(item => item.id !== action.payload);
+        case 'restart app':
+            return [];
+        default:
+            return state;
     }
-    return state;
 };
