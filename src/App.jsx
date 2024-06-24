@@ -17,13 +17,15 @@ export const App = () => {
 
       <div className="py-20 px-5 bg-blue-200">
         <div className="max-w-4xl mx-auto">
-          <Form dispatch={dispatch}/>
+          <Form dispatch={dispatch} />
         </div>
       </div>
-      
-      <div className="p-10 mx-auto max-w-4xl">
-        <ListActivities state={state} dispatch={dispatch} />
-      </div>
+
+      {state.length > 0 && (
+        <div className="p-10 mx-auto max-w-4xl">
+          <ListActivities state={state} dispatch={dispatch} />
+        </div>
+      )}
 
     </>
   )

@@ -21,7 +21,7 @@ export const ListActivities = ({ state, dispatch }) => {
 
     return (
         <>
-            <h2 className="text-center text-4xl font-bold text-slate-600 uppercase">Food and Activities</h2>
+            <h2 className="text-center text-4xl font-bold text-slate-600 uppercase">Activities</h2>
             {state.map(item => (
                 <div key={item.id} className="px-5 py-10 bg-white mt-5 flex justify-between">
                     <div className="space-y-2 relative">
