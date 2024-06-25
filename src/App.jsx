@@ -45,8 +45,8 @@ export const App = () => {
         </div>
       )}
 
-      <footer className="mt-4 bg-gray-800">
-        <p className="text-center text-2xl font-black uppercase text-white">
+      <footer className="py-4 bg-gray-800">
+        <p className="text-center text-xl font-black uppercase text-white">
           Made by <a href="https://github.com/SebaFretes/" target="_blank"><span className="text-gray-400">Sebastian Fretes</span></a>
         </p>
       </footer>
