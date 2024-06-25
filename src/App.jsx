@@ -2,6 +2,7 @@ import { useEffect, useReducer } from "react";
 import { Form } from "./components/Form";
 import { formReducer, initialState, restartApp } from "./reducers/form-reducer";
 import { ListActivities } from "./components/ListActivities";
+import { CalorieTracker } from "./components/CalorieTracker";
 
 export const App = () => {
 
@@ -18,7 +19,7 @@ export const App = () => {
   return (
     <>
       <div className="py-3 bg-blue-300">
-        <div className="max-w-4xl mx-auto flex justify-between">
+        <div className="max-w-4xl mx-auto flex justify-between items-center">
           <h1 className="text-center text-lg font-bold text-white uppercase">Calories Tracker</h1>
           <button onClick={handleRestart} className={`bg-gray-800 hover:bg-gray-900 p-2 font-bold uppercase cursor-pointer text-white rounded-lg ${state.length === 0 && 'opacity-10'}`}>
             Restart App
@@ -29,6 +30,12 @@ export const App = () => {
       <div className="py-20 px-5 bg-blue-200">
         <div className="max-w-4xl mx-auto">
           <Form dispatch={dispatch} />
+        </div>
+      </div>
+
+      <div className="bg-gray-800 py-10">
+        <div className="max-w-4xl mx-auto">
+          <CalorieTracker state={state} />
         </div>
       </div>
 
